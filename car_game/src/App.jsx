@@ -33,7 +33,7 @@ const GameContainer = styled.div`
 `;
 
 const Car = styled.img`
-  width: 50px;
+  width: 100px;
   height: 100px;
   position: absolute;
   top: ${(props) => (props.isPlayer ? "auto" : props.y + "px")};
@@ -51,22 +51,60 @@ const Score = styled.div`
   font-family: Arial, sans-serif;
 `;
 
+const HighScore = styled.div`
+  position: absolute;
+  top: 40px;
+  left: 10px;
+  color: white;
+  font-size: 20px;
+  font-family: Arial, sans-serif;
+`;
+
+const GameOverScreen = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  color: white;
+`;
+
+const RestartButton = styled.button`
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  &:hover {
+    background-color: #45a049;
+  }
+`;
+
 const App = () => {
   const [playerX, setPlayerX] = useState(225);
   const [opponents, setOpponents] = useState([]);
   const [score, setScore] = useState(0);
+  const [highScore, setHighScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
 
   // Handle player movement
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === "ArrowLeft" && playerX > 0) setPlayerX(playerX - 20);
-      if (e.key === "ArrowRight" && playerX < 450) setPlayerX(playerX + 20);
+      if (!gameOver && e.key === "ArrowLeft" && playerX > 0)
+        setPlayerX(playerX - 20);
+      if (!gameOver && e.key === "ArrowRight" && playerX < 450)
+        setPlayerX(playerX + 20);
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [playerX]);
+  }, [playerX, gameOver]);
 
   // Game loop
   useEffect(() => {
@@ -101,8 +139,7 @@ const App = () => {
             opponent.x + 50 > playerX
           ) {
             setGameOver(true);
-            alert(`Game Over! Score: ${score}`);
-            clearInterval(interval);
+            setHighScore((prevHighScore) => Math.max(prevHighScore, score));
             return updatedOpponents;
           }
         }
@@ -117,15 +154,23 @@ const App = () => {
     return () => clearInterval(interval);
   }, [playerX, score, gameOver]);
 
-  // Note: You'll need to provide your own car images
+  // Restart game function
+  const restartGame = () => {
+    setPlayerX(225);
+    setOpponents([]);
+    setScore(0);
+    setGameOver(false);
+  };
+
   const playerCarImage =
     "https://png.pngtree.com/png-vector/20230110/ourmid/pngtree-car-top-view-image-png-image_6557068.png";
   const opponentCarImage =
-    "https://spng.pngfind.com/pngs/s/74-749644_black-car-topview-vector-transparent-library-top-view.png";
+    "https://png.pngtree.com/png-vector/20230408/ourmid/pngtree-gray-sports-car-top-view-vector-png-image_6681667.png";
 
   return (
     <GameContainer>
       <Score>Score: {score}</Score>
+      <HighScore>High Score: {highScore}</HighScore>
       <Car src={playerCarImage} x={playerX} isPlayer={true} alt="Player Car" />
       {opponents.map((opponent, index) => (
         <Car
@@ -137,6 +182,14 @@ const App = () => {
           alt="Opponent Car"
         />
       ))}
+      {gameOver && (
+        <GameOverScreen>
+          <h2>Game Over!</h2>
+          <p>Score: {score}</p>
+          <p>High Score: {highScore}</p>
+          <RestartButton onClick={restartGame}>Restart Game</RestartButton>
+        </GameOverScreen>
+      )}
     </GameContainer>
   );
 };
