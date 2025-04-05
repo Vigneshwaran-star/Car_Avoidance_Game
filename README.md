@@ -1,6 +1,6 @@
 # Car Avoidance Game 🚗
 
-A fast-paced car avoidance game built with **React**, **Tailwind CSS**, and **Framer Motion**. The player controls a car moving forward continuously, avoiding obstacles while the game speed gradually increases.
+A fast-paced car avoidance game built with **React**, **Tailwind CSS**, and **Styled components**. The player controls a car moving forward continuously, avoiding obstacles while the game speed gradually increases.
 
 ## ✨ Features
 - 🚗 **Continuous Forward Movement**: The car moves automatically, creating a dynamic experience.
@@ -8,13 +8,12 @@ A fast-paced car avoidance game built with **React**, **Tailwind CSS**, and **Fr
 - 📈 **Score Tracking**: Tracks and displays the player's score based on survival time or distance traveled.
 - ⏩ **Increasing Difficulty**: The game speeds up over time to challenge the player.
 - 🎮 **Smooth Controls**: Use keyboard events to control the car's movement.
-- 🎨 **Fluid Animations**: Powered by Framer Motion for smooth transitions.
-- 📱 **Responsive Design**: Works seamlessly on both desktop and mobile.
+
 
 ## 🛠️ Technologies Used
 - **React** – For building the game logic and UI components.
 - **Tailwind CSS** – For styling and layout.
-- **Framer Motion** – For animations and smooth transitions.
+- **Styled components** – For animations and smooth transitions.
 
 ## 🎮 How to Play
 1. Use the **left (←) and right (→) arrow keys** to steer the car.
@@ -38,14 +37,10 @@ A fast-paced car avoidance game built with **React**, **Tailwind CSS**, and **Fr
    ```
 4. Open [http://localhost:5173](http://localhost:5173) in your browser to play.
 
-## 📌 Roadmap
-- [ ] Add sound effects & background music.
-- [ ] Implement a leaderboard system.
-- [ ] Introduce power-ups (e.g., speed boost, shield).
-- [ ] Mobile gesture controls for touch devices.
+## The project is live here
+https://crashcar.pages.dev/
 
 ## 🏆 Contributing
 Pull requests are welcome! If you have an idea for improvement, feel free to open an issue or submit a PR.
 
-Made with ❤️ using React, Tailwind CSS, and Framer Motion.
-
+Made with ❤️ using React, Tailwind CSS, Styled components.
