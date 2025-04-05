@@ -37,7 +37,7 @@ A fast-paced car avoidance game built with **React**, **Tailwind CSS**, and **St
    ```
 4. Open [http://localhost:5173](http://localhost:5173) in your browser to play.
 
-## The project is live here
+## The live demo
 https://crashcar.pages.dev/
 
 ## 🏆 Contributing
